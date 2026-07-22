@@ -8,18 +8,21 @@ const fill = document.getElementById('fill');
 
 let animationId = null;
 let startTime = null;
-const duration = 30000;
+const duration = 30000; // 30 segundos
 
-function animate(timestamp) {
+function animateProgress(timestamp){
 
-    if (startTime === null)
+    if(startTime===null){
         startTime = timestamp;
+    }
 
-    const progress = (timestamp - startTime) % duration;
+    const elapsed = (timestamp - startTime) % duration;
 
-    fill.style.width = ((progress / duration) * 100) + "%";
+    const percent = (elapsed / duration) * 100;
 
-    animationId = requestAnimationFrame(animate);
+    fill.style.width = percent + "%";
+
+    animationId = requestAnimationFrame(animateProgress);
 
 }
 
@@ -32,7 +35,7 @@ document.getElementById("playerBtn").onclick = () => {
 
     startTime = null;
 
-    animationId = requestAnimationFrame(animate);
+    animationId = requestAnimationFrame(animateProgress);
 
 };
 
