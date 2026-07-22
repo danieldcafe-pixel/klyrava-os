@@ -7,26 +7,20 @@ const player = document.getElementById('player');
 const fill = document.getElementById('fill');
 
 let animationId = null;
-let startTime = 0;
-const duration = 30000; // 30 segundos
+let startTime = null;
+const duration = 30000;
 
-function animateProgress(timestamp) {
+function animate(timestamp) {
 
-    if (!startTime)
+    if (startTime === null)
         startTime = timestamp;
 
-    const elapsed = timestamp - startTime;
+    const progress = (timestamp - startTime) % duration;
 
-    let percent = (elapsed / duration) * 100;
+    fill.style.width = ((progress / duration) * 100) + "%";
 
-    if (percent > 100) {
-        startTime = timestamp;
-        percent = 0;
-    }
+    animationId = requestAnimationFrame(animate);
 
-    fill.style.width = percent + "%";
-
-    animationId = requestAnimationFrame(animateProgress);
 }
 
 document.getElementById("playerBtn").onclick = () => {
@@ -36,18 +30,18 @@ document.getElementById("playerBtn").onclick = () => {
 
     cancelAnimationFrame(animationId);
 
-    startTime = 0;
+    startTime = null;
 
-    animationId = requestAnimationFrame(animateProgress);
+    animationId = requestAnimationFrame(animate);
 
 };
 
 document.getElementById("back").onclick = () => {
 
+    cancelAnimationFrame(animationId);
+
     player.classList.remove("active");
     call.classList.add("active");
-
-    cancelAnimationFrame(animationId);
 
 };
 
