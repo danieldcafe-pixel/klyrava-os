@@ -1,0 +1,9 @@
+{
+  "name": "KLYRAVA OS",
+  "short_name": "KLYRAVA",
+  "display": "standalone",
+  "background_color": "#07080b",
+  "theme_color": "#07080b",
+  "start_url": "./",
+  "icons": []
+}
