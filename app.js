@@ -1,51 +1,104 @@
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js');
-}
+/*=========================================
+    KLYRAVA OS
+    MASTER V11
+=========================================*/
 
-const call = document.getElementById('call');
-const player = document.getElementById('player');
-const fill = document.getElementById('fill');
+const callScreen = document.getElementById("call");
+const playerScreen = document.getElementById("player");
+
+const sosButton = document.getElementById("sos");
+const playerButton = document.getElementById("playerBtn");
+const backButton = document.getElementById("back");
+
+const progress = document.getElementById("fill");
 
 let animationId = null;
 let startTime = null;
-const duration = 30000; // 30 segundos
 
-function animateProgress(timestamp){
+const SONG_DURATION = 30000;
 
-    if(startTime===null){
-        startTime = timestamp;
+/*=========================================
+    PLAYER BAR
+=========================================*/
+
+function animateBar(time){
+
+    if(startTime === null){
+
+        startTime = time;
+
     }
 
-    const elapsed = (timestamp - startTime) % duration;
+    const elapsed = (time - startTime) % SONG_DURATION;
 
-    const percent = (elapsed / duration) * 100;
+    const percent = (elapsed / SONG_DURATION) * 100;
 
-    fill.style.width = percent + "%";
+    progress.style.width = percent + "%";
 
-    animationId = requestAnimationFrame(animateProgress);
+    animationId = requestAnimationFrame(animateBar);
 
 }
 
-document.getElementById("playerBtn").onclick = () => {
+/*=========================================
+    OPEN PLAYER
+=========================================*/
 
-    call.classList.remove("active");
-    player.classList.add("active");
+function openPlayer(){
 
     cancelAnimationFrame(animationId);
 
     startTime = null;
 
-    animationId = requestAnimationFrame(animateProgress);
+    callScreen.classList.remove("active");
 
-};
+    playerScreen.classList.add("active");
 
-document.getElementById("back").onclick = () => {
+    animationId = requestAnimationFrame(animateBar);
+
+}
+
+/*=========================================
+    BACK
+=========================================*/
+
+function backToSOS(){
 
     cancelAnimationFrame(animationId);
 
-    player.classList.remove("active");
-    call.classList.add("active");
+    progress.style.width = "0%";
 
-};
+    startTime = null;
 
-document.getElementById("sos").onclick = () => {};
+    playerScreen.classList.remove("active");
+
+    callScreen.classList.add("active");
+
+}
+
+/*=========================================
+    EVENTS
+=========================================*/
+
+playerButton.addEventListener("click",openPlayer);
+
+backButton.addEventListener("click",backToSOS);
+
+sosButton.addEventListener("click",()=>{
+
+    navigator.vibrate?.(20);
+
+});
+
+/*=========================================
+    SERVICE WORKER
+=========================================*/
+
+if("serviceWorker" in navigator){
+
+    window.addEventListener("load",()=>{
+
+        navigator.serviceWorker.register("service-worker.js");
+
+    });
+
+}
