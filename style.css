@@ -1,6 +1,7 @@
-/* ===========================
-   KLYRAVA OS V11
-=========================== */
+/* ===================================================
+   KLYRAVA OS
+   MASTER V12
+=================================================== */
 
 *{
     margin:0;
@@ -25,20 +26,6 @@ body{
 
 }
 
-body{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-}
-
-/* ===========================
-   SCREENS
-=========================== */
-
 .screen{
 
     position:absolute;
@@ -54,79 +41,45 @@ body{
     align-items:center;
 
     background:
-    radial-gradient(circle at top,#1b2340 0%,#07080b 60%);
+    radial-gradient(circle at top,#1d2440 0%,#07080b 65%);
 
 }
 
-.screen.active{
+.active{
 
     display:flex;
 
 }
 
-/* ===========================
-   STATUS BAR
-=========================== */
+/*==========================
+STATUS
+==========================*/
 
-.statusbar{
+.status{
 
     position:absolute;
 
     top:18px;
 
-    left:20px;
+    left:18px;
 
-    right:20px;
+    right:18px;
 
     display:flex;
 
     justify-content:space-between;
 
+    color:#bfc6d8;
+
     font-size:12px;
 
     letter-spacing:1px;
 
-    color:#d6d6d6;
-
 }
 
-.carrier{
-
-    font-weight:600;
-
-    color:#9cb2ff;
-
-}
-
-/* ===========================
-   CONTENT
-=========================== */
-
-.content{
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-}
-
-.subtitle{
-
-    margin-bottom:35px;
-
-    font-size:14px;
-
-    letter-spacing:4px;
-
-    color:#8c93a6;
-
-}
-
-/* ===========================
-   SOS
-=========================== */
+/*==========================
+SOS
+==========================*/
 
 #sos{
 
@@ -139,10 +92,9 @@ body{
     border-radius:50%;
 
     background:
-
     radial-gradient(circle at 30% 30%,
-    #ff7588,
-    #d6284d);
+    #ff6b82,
+    #d61d47);
 
     color:white;
 
@@ -150,119 +102,81 @@ body{
 
     font-weight:bold;
 
-    cursor:pointer;
-
     box-shadow:
 
-    0 20px 55px rgba(214,40,77,.45);
-
-    transition:.18s;
+    0 20px 60px rgba(214,29,71,.45);
 
 }
 
 #sos:active{
 
-    transform:scale(.96);
+    transform:scale(.97);
 
 }
 
-/* ===========================
-   PLAYER BUTTON
-=========================== */
+/*==========================
+PLAYER BUTTON
+==========================*/
 
 .playerButton{
 
-    margin-top:34px;
+    margin-top:36px;
 
-    width:78px;
+    width:82px;
 
-    height:78px;
+    height:82px;
 
     border:none;
-
-    background:none;
-
-    cursor:pointer;
-
-}
-
-/* ===========================
-   VINYL
-=========================== */
-
-.vinyl{
-
-    position:relative;
-
-    width:60px;
-
-    height:60px;
 
     border-radius:50%;
 
     background:
 
-    radial-gradient(circle,#1b1b1b 35%,#090909 100%);
+    linear-gradient(
+        180deg,
+        #3fe66d,
+        #17953b
+    );
 
     box-shadow:
 
-    inset 0 0 0 2px #303030,
-
-    0 8px 20px rgba(0,0,0,.45);
-
-}
-
-.vinyl::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:10px;
-
-    border-radius:50%;
-
-    border:1px solid rgba(255,255,255,.12);
-
-}
-
-.vinyl::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:12px;
-
-    height:12px;
-
-    background:#d6284d;
-
-    border-radius:50%;
-
-    left:50%;
-
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-}
-
-/* ===========================
-   PLAYER
-=========================== */
-
-.playerContent{
-
-    width:82%;
+    0 10px 28px rgba(22,149,59,.45);
 
     display:flex;
 
-    flex-direction:column;
+    justify-content:center;
 
     align-items:center;
 
+    cursor:pointer;
+
 }
+
+.playerButton:active{
+
+    transform:scale(.95);
+
+}
+
+/*==========================
+PLAY ICON
+==========================*/
+
+.playIcon{
+
+    color:white;
+
+    font-size:38px;
+
+    margin-left:4px;
+
+    font-weight:bold;
+
+}
+
+/*==========================
+PLAYER
+==========================*/
 
 .album{
 
@@ -270,21 +184,21 @@ body{
 
     height:180px;
 
-    border-radius:26px;
+    border-radius:24px;
 
     background:
 
-    linear-gradient(135deg,#7a65ff,#ef4b5a);
-
-    box-shadow:
-
-    0 18px 40px rgba(0,0,0,.4);
+    linear-gradient(
+        135deg,
+        #7a65ff,
+        #ef4b5a
+    );
 
 }
 
 .track{
 
-    margin-top:26px;
+    margin-top:24px;
 
     font-size:22px;
 
@@ -292,23 +206,23 @@ body{
 
 .bar{
 
-    width:100%;
+    width:260px;
 
     height:6px;
 
-    margin-top:26px;
-
-    background:#2c2c2c;
+    margin-top:24px;
 
     border-radius:20px;
 
     overflow:hidden;
 
+    background:#2b2b2b;
+
 }
 
 #fill{
 
-    width:0%;
+    width:0;
 
     height:100%;
 
@@ -316,32 +230,18 @@ body{
 
 }
 
-/* ===========================
-   BACK
-=========================== */
-
 .backButton{
 
     margin-top:30px;
 
-    padding:12px 26px;
-
     border:none;
+
+    padding:12px 28px;
 
     border-radius:999px;
 
     background:#7a65ff;
 
     color:white;
-
-    font-size:14px;
-
-    cursor:pointer;
-
-}
-
-.backButton:active{
-
-    transform:scale(.96);
 
 }
