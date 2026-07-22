@@ -1,26 +1,86 @@
-<!doctype html><html lang="en"><head>
+<!doctype html>
+<html lang="en">
+<head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#07080b">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="KLYRAVA">
-<link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
-<title>KLYRAVA OS</title>
+<link rel="manifest" href="manifest.json">
+<title>KLYRAVA</title>
 <link rel="stylesheet" href="style.css">
-</head><body>
-<div id="call" class="screen active">
-<h1>KLYRAVA OS</h1>
-<div class="sub">Emergency Call</div>
-<button id="sos">SOS</button>
-<button id="playerBtn" class="small">KLYRAVA</button>
-</div>
-<div id="player" class="screen">
-<h1>KLYRAVA</h1>
-<div class="album"></div>
-<div class="track">Now Playing</div>
-<div class="bar"><div id="fill"></div></div>
-<button id="back" class="small">Back</button>
-</div>
+</head>
+<body>
+<main class="app">
+  <section id="home" class="screen active">
+    <header class="status">
+      <span class="clock">9:41</span>
+      <span class="carrier">ALTAIR MOBILE</span>
+      <span>5G ▰</span>
+    </header>
+
+    <div class="center">
+      <div class="eyebrow">EMERGENCY ACCESS</div>
+      <div class="sos-wrap">
+        <div class="ring"></div><div class="ring second"></div>
+        <button id="sosBtn" class="sos" type="button">SOS</button>
+      </div>
+
+      <button id="homeMusicBtn" class="music-launch" type="button" aria-label="Open music player">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M18 15c12 1 20-7 29-9v31c0 8-6 14-14 14-6 0-10-3-10-8 0-6 5-10 12-10 2 0 4 .3 6 1V18c-7 4-12 6-23 6v21c0 8-6 13-14 13-6 0-10-3-10-8 0-6 5-10 12-10 2 0 4 .3 6 1V15z"/>
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <section id="call" class="screen right">
+    <header class="status">
+      <span class="clock">9:41</span>
+      <span class="carrier">ALTAIR MOBILE</span>
+      <span>5G ▰</span>
+    </header>
+
+    <div class="center">
+      <div class="eyebrow">EMERGENCY CALL</div>
+      <h1>Emergency Services</h1>
+      <div class="call-orb">☎</div>
+      <div id="callState" class="call-state">Calling…</div>
+      <div id="timer" class="timer">00:00</div>
+
+      <button id="callMusicBtn" class="music-launch small-launch" type="button" aria-label="Open music player">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M18 15c12 1 20-7 29-9v31c0 8-6 14-14 14-6 0-10-3-10-8 0-6 5-10 12-10 2 0 4 .3 6 1V18c-7 4-12 6-23 6v21c0 8-6 13-14 13-6 0-10-3-10-8 0-6 5-10 12-10 2 0 4 .3 6 1V15z"/>
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <section id="player" class="screen right">
+    <header class="status">
+      <span class="clock">9:41</span>
+      <span class="carrier">ALTAIR MOBILE</span>
+      <span>5G ▰</span>
+    </header>
+
+    <div class="center player-center">
+      <div class="player-label">KLYRAVA AUDIO</div>
+      <div class="album">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M18 15c12 1 20-7 29-9v31c0 8-6 14-14 14-6 0-10-3-10-8 0-6 5-10 12-10 2 0 4 .3 6 1V18c-7 4-12 6-23 6v21c0 8-6 13-14 13-6 0-10-3-10-8 0-6 5-10 12-10 2 0 4 .3 6 1V15z"/>
+        </svg>
+      </div>
+      <h2>After the Fall</h2>
+      <p>Northline</p>
+      <div class="progress"><div id="fill"></div></div>
+      <div class="times"><span id="elapsed">0:00</span><span>-0:30</span></div>
+      <button id="playBtn" class="play" type="button">❚❚</button>
+      <button id="resetBtn" class="reset" type="button">RESET SCENE</button>
+    </div>
+  </section>
+</main>
 <script src="app.js"></script>
-</body></html>
+</body>
+</html>
