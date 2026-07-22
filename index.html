@@ -1,22 +1,45 @@
-<!doctype html><html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#07080b">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="KLYRAVA">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
-<link rel="stylesheet" href="style.css"><title>KLYRAVA</title></head>
+<link rel="stylesheet" href="style.css">
+<title>KLYRAVA</title>
+</head>
 <body>
+
 <div id="call" class="screen active">
-<div class="status"><span>Altair Mobile</span><span>09:41</span></div>
-<button id="sos">SOS</button>
-<button id="playerBtn" class="playerButton"><div class="playIcon">▶</div></button>
+    <div class="status">
+        <span>Altair Mobile</span>
+        <span>09:41</span>
+    </div>
+
+    <button id="sos">SOS</button>
+
+    <button id="playerBtn" class="playerButton" aria-label="Open music player">
+        <span class="playIcon"></span>
+    </button>
 </div>
+
 <div id="player" class="screen">
-<div class="album"></div>
-<div class="track">Now Playing</div>
-<div class="bar"><div id="fill"></div></div>
-<button id="back" class="backButton">BACK</button>
+    <div class="album">
+        <span class="albumPlayIcon"></span>
+    </div>
+
+    <div class="track">Now Playing</div>
+
+    <div class="bar">
+        <div id="fill"></div>
+    </div>
+
+    <button id="back" class="backButton">BACK</button>
 </div>
+
 <script src="app.js"></script>
-</body></html>
+</body>
+</html>

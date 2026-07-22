@@ -1,8 +1,43 @@
+const callScreen=document.getElementById("call");
+const playerScreen=document.getElementById("player");
+const playerButton=document.getElementById("playerBtn");
+const backButton=document.getElementById("back");
+const sosButton=document.getElementById("sos");
+const progressBar=document.getElementById("fill");
 
-const call=document.getElementById('call'),player=document.getElementById('player');
-const fill=document.getElementById('fill');
-let raf,start=null;const DUR=30000;
-function loop(t){if(start===null)start=t;fill.style.width=(((t-start)%DUR)/DUR*100)+'%';raf=requestAnimationFrame(loop);}
-playerBtn.onclick=()=>{call.classList.remove('active');player.classList.add('active');cancelAnimationFrame(raf);start=null;raf=requestAnimationFrame(loop);}
-back.onclick=()=>{cancelAnimationFrame(raf);fill.style.width='0%';player.classList.remove('active');call.classList.add('active');}
-if('serviceWorker' in navigator){navigator.serviceWorker.register('service-worker.js');}
+let animationFrame=null;
+let startTime=null;
+const SONG_TIME=30000;
+
+function progressLoop(time){
+    if(startTime===null) startTime=time;
+    const elapsed=(time-startTime)%SONG_TIME;
+    progressBar.style.width=((elapsed/SONG_TIME)*100)+"%";
+    animationFrame=requestAnimationFrame(progressLoop);
+}
+
+function openPlayer(){
+    callScreen.classList.remove("active");
+    playerScreen.classList.add("active");
+    cancelAnimationFrame(animationFrame);
+    startTime=null;
+    animationFrame=requestAnimationFrame(progressLoop);
+}
+
+function closePlayer(){
+    cancelAnimationFrame(animationFrame);
+    progressBar.style.width="0%";
+    startTime=null;
+    playerScreen.classList.remove("active");
+    callScreen.classList.add("active");
+}
+
+playerButton.addEventListener("click",openPlayer);
+backButton.addEventListener("click",closePlayer);
+sosButton.addEventListener("click",()=>navigator.vibrate?.(25));
+
+if("serviceWorker" in navigator){
+    window.addEventListener("load",()=>{
+        navigator.serviceWorker.register("service-worker.js");
+    });
+}
