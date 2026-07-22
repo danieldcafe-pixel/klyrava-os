@@ -1,7 +1,7 @@
-/*=========================================
+/*====================================================
     KLYRAVA OS
-    MASTER V11
-=========================================*/
+    MASTER V12
+====================================================*/
 
 const callScreen = document.getElementById("call");
 const playerScreen = document.getElementById("player");
@@ -10,88 +10,96 @@ const sosButton = document.getElementById("sos");
 const playerButton = document.getElementById("playerBtn");
 const backButton = document.getElementById("back");
 
-const progress = document.getElementById("fill");
+const progressBar = document.getElementById("fill");
 
-let animationId = null;
+let animationFrame = null;
 let startTime = null;
 
-const SONG_DURATION = 30000;
+const SONG_TIME = 30000;
 
-/*=========================================
-    PLAYER BAR
-=========================================*/
+/*======================================
+PLAYER
+======================================*/
 
-function animateBar(time){
+function openPlayer(){
 
-    if(startTime === null){
+    callScreen.classList.remove("active");
+    playerScreen.classList.add("active");
+
+    startProgress();
+
+}
+
+function closePlayer(){
+
+    playerScreen.classList.remove("active");
+    callScreen.classList.add("active");
+
+    stopProgress();
+
+}
+
+/*======================================
+PROGRESS BAR
+======================================*/
+
+function startProgress(){
+
+    cancelAnimationFrame(animationFrame);
+
+    startTime = null;
+
+    animationFrame = requestAnimationFrame(progressLoop);
+
+}
+
+function stopProgress(){
+
+    cancelAnimationFrame(animationFrame);
+
+    progressBar.style.width = "0%";
+
+}
+
+function progressLoop(time){
+
+    if(startTime===null){
 
         startTime = time;
 
     }
 
-    const elapsed = (time - startTime) % SONG_DURATION;
+    const elapsed = (time-startTime)%SONG_TIME;
 
-    const percent = (elapsed / SONG_DURATION) * 100;
+    const percent = (elapsed/SONG_TIME)*100;
 
-    progress.style.width = percent + "%";
+    progressBar.style.width = percent+"%";
 
-    animationId = requestAnimationFrame(animateBar);
-
-}
-
-/*=========================================
-    OPEN PLAYER
-=========================================*/
-
-function openPlayer(){
-
-    cancelAnimationFrame(animationId);
-
-    startTime = null;
-
-    callScreen.classList.remove("active");
-
-    playerScreen.classList.add("active");
-
-    animationId = requestAnimationFrame(animateBar);
+    animationFrame=requestAnimationFrame(progressLoop);
 
 }
 
-/*=========================================
-    BACK
-=========================================*/
-
-function backToSOS(){
-
-    cancelAnimationFrame(animationId);
-
-    progress.style.width = "0%";
-
-    startTime = null;
-
-    playerScreen.classList.remove("active");
-
-    callScreen.classList.add("active");
-
-}
-
-/*=========================================
-    EVENTS
-=========================================*/
+/*======================================
+BUTTONS
+======================================*/
 
 playerButton.addEventListener("click",openPlayer);
 
-backButton.addEventListener("click",backToSOS);
+backButton.addEventListener("click",closePlayer);
 
 sosButton.addEventListener("click",()=>{
 
-    navigator.vibrate?.(20);
+    if(navigator.vibrate){
+
+        navigator.vibrate(25);
+
+    }
 
 });
 
-/*=========================================
-    SERVICE WORKER
-=========================================*/
+/*======================================
+SERVICE WORKER
+======================================*/
 
 if("serviceWorker" in navigator){
 
